@@ -7,12 +7,15 @@ import { LayoutType } from './enums'
 import ToggleLayoutType from './components/ToggleLayoutType'
 import TotalResults from './components/TotalResults'
 import Pagination from './components/Pagination'
+import NoResultsFound from './components/NoResultsFound'
 
 export default function MovieSearchResult() {
   const { results, count, query } = useAppSelector(selectMovieSearch)
   const [layoutType, setLayoutType] = useState<LayoutType>(LayoutType.GRID)
 
   if (!query) return null
+
+  if (query && !results.length) return <NoResultsFound query={query} />
 
   return (
     <div className='md:mx-16'>
