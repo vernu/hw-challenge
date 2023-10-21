@@ -7,19 +7,24 @@ import {
   updateSearchQuery,
 } from '@/store/slices/movieSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import SearchingIndicator from './SearchingIndicator'
 
 const DEBOUNCE_DELAY = 2000
 
 export default function SearchMovieSection() {
   const dispatch = useAppDispatch()
-  const { query } = useAppSelector(selectMovieSearch)
+  const { query, loading } = useAppSelector(selectMovieSearch)
   const [inputValue, setInputValue] = useState('')
 
   useEffect(() => {
     const interval = setInterval(() => {
       dispatch(updateSearchQuery(inputValue))
       if (inputValue && query !== inputValue) {
-        dispatch(searchMovies(inputValue))
+        dispatch(
+          searchMovies({
+            query: inputValue,
+          })
+        )
       }
     }, DEBOUNCE_DELAY)
     return () => clearInterval(interval)
@@ -44,6 +49,8 @@ export default function SearchMovieSection() {
         {' | '}
         <span>Series</span>
       </div>
+
+      {loading && <SearchingIndicator />}
     </>
   )
 }

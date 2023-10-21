@@ -19,18 +19,29 @@ export interface MovieEntity {
 }
 
 export interface MovieSearchResponsePayload {
-  page: number
   results: MovieEntity[]
   total: number
+  next: number | null
+  previous: number | null
+  current: number
+  count: number
+  pages: number
 }
 
 class MovieApi {
   constructor() {}
 
-  async searchMovies(query: string): Promise<MovieSearchResponsePayload> {
+  async searchMovies({
+    query,
+    page = 1,
+  }: {
+    query: string
+    page: number
+  }): Promise<MovieSearchResponsePayload> {
     const res = await httpClient.get('/movies/', {
       params: {
-        search: query,
+        query,
+        p: page,
       },
     })
     return res.data

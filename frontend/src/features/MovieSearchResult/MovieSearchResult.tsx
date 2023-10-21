@@ -6,6 +6,7 @@ import MoviesListView from './components/MoviesListView'
 import { LayoutType } from './enums'
 import ToggleLayoutType from './components/ToggleLayoutType'
 import TotalResults from './components/TotalResults'
+import Pagination from './components/Pagination'
 
 export default function MovieSearchResult() {
   const { results, count, query } = useAppSelector(selectMovieSearch)
@@ -26,6 +27,10 @@ export default function MovieSearchResult() {
       <div className=''>
         {layoutType === LayoutType.GRID && <MoviesGridView results={results} />}
         {layoutType === LayoutType.LIST && <MoviesListView results={results} />}
+      </div>
+
+      <div className=''>
+        <Pagination />
       </div>
     </div>
   )

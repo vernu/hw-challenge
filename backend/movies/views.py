@@ -13,9 +13,10 @@ class StandardPagination(PageNumberPagination):
         return Response({
             'next': self.page.next_page_number() if self.page.has_next() else None,
             'previous': self.page.previous_page_number() if self.page.has_previous() else None,
+            'current': self.page.number,
             'count': self.page.paginator.count,
             'pages': self.page.paginator.num_pages,
-            'results': data
+            'results': data,
         })
 
 class MovieListView(ListAPIView):
@@ -25,7 +26,7 @@ class MovieListView(ListAPIView):
 
     def get_queryset(self):
         queryset = Movie.objects.all()
-        search = self.request.query_params.get('search')
+        search = self.request.query_params.get('query')
         if search:
             queryset = queryset.filter(title__icontains=search)
         return queryset

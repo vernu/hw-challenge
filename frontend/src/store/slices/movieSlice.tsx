@@ -18,7 +18,8 @@ interface MovieSearchState {
   loading: boolean
   error: string | null
   results: MovieEntity[]
-  page: number
+  pages: number
+  current: number
   count: number
   next: number | null
   previous: number | null
@@ -40,22 +41,28 @@ const initialState: MovieState = {
     loading: false,
     error: null,
     results: [],
-    page: 1,
+    pages: 0,
+    current: 0,
     count: 0,
     next: null,
     previous: null,
   },
 }
 
+interface SearchMoviesParams {
+  query: string
+  page?: number
+}
 export const searchMovies = createAsyncThunk(
   'movie/searchMovies',
-  async (payload: string, { rejectWithValue }) => {
+  async ({ query, page = 1 }: SearchMoviesParams, { rejectWithValue }) => {
     try {
-      const res = await movieApi.searchMovies(payload)
-      console.log(res)
+      const res = await movieApi.searchMovies({
+        query,
+        page,
+      })
       return res
     } catch (e) {
-      console.log(e)
       return rejectWithValue(e)
     }
   }
@@ -78,10 +85,15 @@ export const movieSlice = createSlice({
         searchMovies.fulfilled,
         (state, action: PayloadAction<MovieSearchResponsePayload>) => {
           state.search = {
-            ...state.search,
+            query: state.search.query,
             loading: false,
             error: null,
-            ...action.payload,
+            current: action.payload.current,
+            count: action.payload.count,
+            next: action.payload.next,
+            previous: action.payload.previous,
+            pages: action.payload.pages,
+            results: action.payload.results,
           }
         }
       )
