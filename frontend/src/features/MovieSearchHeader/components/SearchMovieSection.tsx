@@ -12,7 +12,7 @@ import MovieIcon from '@/components/icons/MovieIcon'
 import TvSeriesIcon from '@/components/icons/TvSeriesIcon'
 import SearchIcon from '@/components/icons/SearchIcon'
 
-const DEBOUNCE_DELAY = 2000
+const DEBOUNCE_DELAY = 500
 
 export default function SearchMovieSection() {
   const dispatch = useAppDispatch()
