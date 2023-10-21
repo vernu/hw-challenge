@@ -68,6 +68,18 @@ export const searchMovies = createAsyncThunk(
   }
 )
 
+export const findMovieById = createAsyncThunk(
+  'movie/findMovieById',
+  async (id: number, { rejectWithValue }) => {
+    try {
+      const res = await movieApi.findMovieById(id)
+      return res
+    } catch (e) {
+      return rejectWithValue(e)
+    }
+  }
+)
+
 export const movieSlice = createSlice({
   name: 'movie',
   initialState,
@@ -100,6 +112,21 @@ export const movieSlice = createSlice({
       .addCase(searchMovies.rejected, (state, action) => {
         state.search.loading = false
         state.search.error = action.payload as string
+      })
+
+      .addCase(findMovieById.pending, (state) => {
+        state.detail.loading = true
+      })
+      .addCase(findMovieById.fulfilled, (state, action) => {
+        state.detail = {
+          loading: false,
+          data: action.payload,
+          error: null,
+        }
+      })
+      .addCase(findMovieById.rejected, (state, action) => {
+        state.detail.loading = false
+        state.detail.error = action.payload as string
       })
   },
 })

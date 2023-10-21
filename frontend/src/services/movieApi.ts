@@ -15,7 +15,7 @@ export interface MovieEntity {
   year: number
   rating: number
   overview: string
-  actors?: null
+  actors?: string |null
 }
 
 export interface MovieSearchResponsePayload {
@@ -47,7 +47,7 @@ class MovieApi {
     return res.data
   }
 
-  async getMovieById(id: number): Promise<MovieEntity> {
+  async findMovieById(id: number): Promise<MovieEntity> {
     const res = await httpClient.get(`/movies/${id}`)
     return res.data
   }
