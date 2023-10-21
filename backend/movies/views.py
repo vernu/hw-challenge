@@ -7,8 +7,16 @@ from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.pagination import PageNumberPagination
 
 class StandardPagination(PageNumberPagination):
-    page_size = 10
+    page_size = 12
     page_query_param = 'p'
+    def get_paginated_response(self, data):
+        return Response({
+            'next': self.page.next_page_number() if self.page.has_next() else None,
+            'previous': self.page.previous_page_number() if self.page.has_previous() else None,
+            'count': self.page.paginator.count,
+            'pages': self.page.paginator.num_pages,
+            'results': data
+        })
 
 class MovieListView(ListAPIView):
     queryset = Movie.objects.all()
