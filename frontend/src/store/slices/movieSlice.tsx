@@ -1,12 +1,11 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 import { RootState } from '../store'
-
-interface MovieEntity {
-  id: number
-  title: string
-  poster_path: string
-}
+import {
+  MovieEntity,
+  MovieSearchResponsePayload,
+  movieApi,
+} from '../../services/movieApi'
 
 interface MovieDetailState {
   loading: boolean
@@ -18,11 +17,11 @@ interface MovieSearchState {
   query: string
   loading: boolean
   error: string | null
-  data: MovieEntity[]
+  results: MovieEntity[]
   page: number
-  totalResults: number
-  totalPages: number
-  nextPage: number | null
+  count: number
+  next: number | null
+  previous: number | null
 }
 
 interface MovieState {
@@ -40,13 +39,27 @@ const initialState: MovieState = {
     query: '',
     loading: false,
     error: null,
-    data: [],
+    results: [],
     page: 1,
-    totalResults: 0,
-    totalPages: 0,
-    nextPage: null,
+    count: 0,
+    next: null,
+    previous: null,
   },
 }
+
+export const searchMovies = createAsyncThunk(
+  'movie/searchMovies',
+  async (payload: string, { rejectWithValue }) => {
+    try {
+      const res = await movieApi.searchMovies(payload)
+      console.log(res)
+      return res
+    } catch (e) {
+      console.log(e)
+      return rejectWithValue(e)
+    }
+  }
+)
 
 export const movieSlice = createSlice({
   name: 'movie',
@@ -56,7 +69,27 @@ export const movieSlice = createSlice({
       state.search.query = action.payload
     },
   },
-  extraReducers: (builder) => {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(searchMovies.pending, (state) => {
+        state.search.loading = true
+      })
+      .addCase(
+        searchMovies.fulfilled,
+        (state, action: PayloadAction<MovieSearchResponsePayload>) => {
+          state.search = {
+            ...state.search,
+            loading: false,
+            error: null,
+            ...action.payload,
+          }
+        }
+      )
+      .addCase(searchMovies.rejected, (state, action) => {
+        state.search.loading = false
+        state.search.error = action.payload as string
+      })
+  },
 })
 
 export const { updateSearchQuery } = movieSlice.actions
