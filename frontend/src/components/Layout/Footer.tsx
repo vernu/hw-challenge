@@ -26,7 +26,7 @@ const socialIcons = [
 
 export default function Footer() {
   return (
-    <footer className='mt-auto mx-12 my-4 '>
+    <footer className='mt-auto mx-12 my-4' data-testid='footer'>
       <div className='flex justify-between'>
         <div className='flex flex-row justify-center items-center font-thin'>
           <img src={footerLogo} alt='HelloMovies Logo' className='w-32 h-4' />
@@ -42,7 +42,7 @@ export default function Footer() {
           {
             <div className='flex flex-row gap-4'>
               {socialIcons.map(({ icon, link }) => (
-                <span className='w-5'>
+                <span className='w-5' key={link}>
                   <Link to={link}>
                     <span className='w-4 fill-light'> {icon}</span>
                   </Link>

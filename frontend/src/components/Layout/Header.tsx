@@ -3,7 +3,7 @@ import headerLogo from '@/assets/logos/header-logo.svg'
 
 export default function Header() {
   return (
-    <header>
+    <header data-testid='header'>
       <Link to='/'>
         <img
           src={headerLogo}
