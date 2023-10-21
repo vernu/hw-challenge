@@ -37,9 +37,11 @@ export default function Pagination() {
 
   return (
     <div className='flex flex-row justify-between'>
-      <div className=''>
-        Showing {firstItem} to {lastItem} of {count} results
+      <div className='flex flex-row gap-2'>
+        Showing {firstItem} to {lastItem} of
+        <span className='text-primary'>{count}</span> results
       </div>
+
       <div className='flex flex-row justify-between gap-2'>
         <Button onClick={handlePrevious} disabled={!previous}>
           Previous

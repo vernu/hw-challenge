@@ -3,7 +3,7 @@ import SearchMovieSection from './components/SearchMovieSection'
 
 export default function MovieSearchHeader() {
   return (
-    <div>
+    <div className='my-24'>
       <WelcomeSection />
       <SearchMovieSection />
     </div>

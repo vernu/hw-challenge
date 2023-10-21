@@ -1,6 +1,7 @@
 import Button from '@/components/Button/Button'
 import { MovieEntity } from '@/services/movieApi'
 import { Link } from 'react-router-dom'
+import ArrowIcon from '@/components/icons/ArrowIcon'
 
 interface MovieDetailProps {
   movie: MovieEntity
@@ -46,7 +47,7 @@ export default function MovieDetail({ movie }: MovieDetailProps) {
 
         <div className=''>
           <Link to='/'>
-            <Button>Back to home</Button>
+            <Button icon={<ArrowIcon />}>Back to home</Button>
           </Link>
         </div>
       </div>

@@ -15,8 +15,8 @@ export default function MovieSearchResult() {
   if (!query) return null
 
   return (
-    <div>
-      <div className='flex flex-row justify-between'>
+    <div className='md:mx-16'>
+      <div className='flex flex-row justify-between my-8'>
         <TotalResults count={count} />
         <ToggleLayoutType
           currentLayoutType={layoutType}
@@ -29,7 +29,7 @@ export default function MovieSearchResult() {
         {layoutType === LayoutType.LIST && <MoviesListView results={results} />}
       </div>
 
-      <div className=''>
+      <div className='my-8'>
         <Pagination />
       </div>
     </div>

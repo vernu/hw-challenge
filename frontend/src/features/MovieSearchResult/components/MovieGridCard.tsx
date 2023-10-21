@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { MovieEntity } from '@/services/movieApi'
+import StarIcon from '@/components/icons/StarIcon'
 
 interface MovieGridCardProps {
   movie: MovieEntity
@@ -10,21 +11,34 @@ export default function MovieGridCard({ movie }: MovieGridCardProps) {
 
   return (
     <Link to={`/movies/${id}`}>
-      <div className='w- 48'>
-        <div className=''>{year}</div>
-        <img src={image} alt={title} />
-        <div className=''>{title}</div>
-        <div className='flex justify-between'>
-          <div className=''>
-            {genres.map(({ id, name }) => (
-              <span key={id} className='m-2'>
-                {name}
-              </span>
-            ))}
+      <div className='flex flex-col gap-1'>
+        <div className='relative'>
+          <img src={image} alt={title} className='rounded-xl' />
+          <div className='absolute top-8 left-0 flex items-center justify-center'>
+            <span className='bg-dark text-light px-2 py-1 text-sm rounded-br-xl rounded-tr-xl'>
+              {year}
+            </span>
           </div>
-          <div className=''>{duration} mins</div>
         </div>
-        <div className=''>IMDb: {rating}</div>
+        <div className='text-center font-bold text-secondary truncate'>
+          {title}
+        </div>
+        <div className='flex justify-center text-xs gap-2'>
+          {genres.slice(0, 3).map(({ id, name }) => (
+            <span key={id} className=''>
+              {name}
+            </span>
+          ))}
+          <span className='text-secondary'>•</span>
+          <span className=''>{duration} mins</span>
+        </div>
+        <div className='flex flex-row justify-center text-xs'>
+          <span className='mr-1'> IMDb:</span>
+          <span className='fill-primary w-4'>
+            <StarIcon />
+          </span>
+          <span className='bold'>{rating}</span>
+        </div>
       </div>
     </Link>
   )
