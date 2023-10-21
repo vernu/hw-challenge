@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { useAppSelector } from '../../store/hooks'
-import { selectMovieSearch } from '../../store/slices/movieSlice'
+import { useAppSelector } from '@/store/hooks'
+import { selectMovieSearch } from '@/store/slices/movieSlice'
 import MoviesGridView from './components/MoviesGridView'
 import MoviesListView from './components/MoviesListView'
 import { LayoutType } from './enums'

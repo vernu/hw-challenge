@@ -1,4 +1,4 @@
-import { MovieEntity } from '../../../services/movieApi'
+import { MovieEntity } from '@/services/movieApi'
 
 interface MoviesListViewProps {
   results: MovieEntity[]

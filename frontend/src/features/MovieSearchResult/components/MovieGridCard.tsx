@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { MovieEntity } from '../../../services/movieApi'
+import { MovieEntity } from '@/services/movieApi'
 
 interface MovieGridCardProps {
   movie: MovieEntity

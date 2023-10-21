@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react'
-import Input from '../../../components/Input/Input'
+import Input from '@/components/Input/Input'
 
 import {
   searchMovies,
   selectMovieSearch,
   updateSearchQuery,
-} from '../../../store/slices/movieSlice'
-import { useAppDispatch, useAppSelector } from '../../../store/hooks'
+} from '@/store/slices/movieSlice'
+import { useAppDispatch, useAppSelector } from '@/store/hooks'
 
 const DEBOUNCE_DELAY = 2000
 

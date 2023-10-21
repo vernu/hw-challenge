@@ -1,4 +1,4 @@
-import { MovieEntity } from '../../../services/movieApi'
+import { MovieEntity } from '@/services/movieApi'
 import MovieGridCard from './MovieGridCard'
 
 interface MoviesGridViewProps {

@@ -5,7 +5,7 @@ import {
   MovieEntity,
   MovieSearchResponsePayload,
   movieApi,
-} from '../../services/movieApi'
+} from '@/services/movieApi'
 
 interface MovieDetailState {
   loading: boolean
