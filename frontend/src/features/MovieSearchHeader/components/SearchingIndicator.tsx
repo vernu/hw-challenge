@@ -3,7 +3,7 @@ import LoadingAnimatedIcon from '@/components/icons/LoadingAnimatedIcon'
 export default function SearchingIndicator() {
   return (
     <div
-      className='fixed top-0 left-0 flex flex-col justify-center items-center w-full h-full backdrop-brightness-50'
+      className='fixed top-0 left-0 flex flex-col justify-center items-center w-full h-full backdrop-brightness-50 z-50'
       data-testid='searching-indicator'
     >
       <span className='fill-light w-8'>
