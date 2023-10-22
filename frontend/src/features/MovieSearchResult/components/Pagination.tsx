@@ -43,10 +43,14 @@ export default function Pagination() {
       </div>
 
       <div className='flex flex-row justify-between gap-2'>
-        <Button onClick={handlePrevious} disabled={!previous}>
+        <Button
+          onClick={handlePrevious}
+          disabled={!previous}
+          data-testid='previous-button'
+        >
           Previous
         </Button>
-        <Button onClick={handleNext} disabled={!next}>
+        <Button onClick={handleNext} disabled={!next} data-testid='next-button'>
           Next
         </Button>
       </div>

@@ -41,6 +41,7 @@ export default function SearchMovieSection() {
     <>
       <div className='flex flex-col justify-center items-center py-4'>
         <Input
+          data-testid='search-movie-input'
           value={inputValue}
           icon={<SearchIcon />}
           onChange={handleInputChange}

@@ -3,7 +3,10 @@ interface NoResultsFoundProps {
 }
 export default function NoResultsFound({ query }: NoResultsFoundProps) {
   return (
-    <div className='flex justify-center text-primary'>
+    <div
+      className='flex justify-center text-primary'
+      data-testid='no-results-found'
+    >
       No results found for "{query}"
     </div>
   )

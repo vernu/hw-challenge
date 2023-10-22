@@ -15,7 +15,7 @@ export default function MovieSearchResult() {
 
   if (!query) return null
 
-  if (query && !results.length) return <NoResultsFound query={query} />
+  if (query && results?.length === 0) return <NoResultsFound query={query} />
 
   return (
     <div className='md:mx-16'>
