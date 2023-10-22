@@ -15,4 +15,7 @@ export default defineConfig({
     environment: 'happy-dom',
     setupFiles: 'config/setupTests.js',
    },
+   server: {
+    port: 3000
+  }
 })

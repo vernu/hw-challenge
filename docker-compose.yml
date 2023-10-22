@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  backend:
+    build: ./backend
+    command: sh -c "poetry run ./manage.py migrate &&
+      poetry run ./manage.py loaddata genres &&
+      poetry run ./manage.py loaddata movies &&
+      poetry run ./manage.py runserver 0.0.0.0:8000"
+    ports:
+      - '8000:8000'
+    environment:
+      DEBUG: 'false'
+      DJANGO_SECRET_KEY: secret
+      DATABASE_HOST: db
+      DATABASE_NAME: moviesdb
+      DATABASE_USER: postgres
+      DATABASE_PASSWORD: postgres
+    restart: unless-stopped
+    depends_on:
+      - db
+  db:
+    image: postgres:14.0-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: moviesdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    command: "pnpm run start"
+    ports:
+      - '3000:3000'
+    restart: unless-stopped
+    depends_on:
+      - backend
+volumes:
+  pgdata: {}
