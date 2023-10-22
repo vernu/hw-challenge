@@ -32,7 +32,9 @@ export default function MovieDetail({ movie }: MovieDetailProps) {
         </div>
 
         <div className='md:col-span-2 my-8'>
-          <h1 className='text-4xl text-secondary font-bold uppercase'>{title}</h1>
+          <h1 className='text-4xl text-secondary font-bold uppercase'>
+            {title}
+          </h1>
           <div className='my-4'>{overview}</div>
 
           <div className='flex justify-between py-4'>
@@ -65,7 +67,7 @@ export default function MovieDetail({ movie }: MovieDetailProps) {
               <span className='w-24 text-sky-200'> Director: </span>
               <span className=''>
                 {actors?.split(',').map((actor) => (
-                  <div>{actor}</div>
+                  <div key={actor}>{actor}</div>
                 ))}
               </span>
             </div>

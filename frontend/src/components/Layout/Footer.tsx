@@ -8,19 +8,19 @@ import LinkedInIcon from '../icons/LinkedInIcon'
 const socialIcons = [
   {
     icon: <FacebookIcon />,
-    link: '#',
+    link: 'https://facebook.com',
   },
   {
     icon: <LinkedInIcon />,
-    link: '#',
+    link: 'https://linkedin.com',
   },
   {
     icon: <DribbbleIcon />,
-    link: '#',
+    link: 'https://dribbble.com',
   },
   {
     icon: <InstagramIcon />,
-    link: '#',
+    link: 'https://instagram.com',
   },
 ]
 
