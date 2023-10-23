@@ -27,10 +27,12 @@ const socialIcons = [
 export default function Footer() {
   return (
     <footer className='mt-auto mx-12 my-4' data-testid='footer'>
-      <div className='flex justify-between'>
-        <div className='flex flex-row justify-center items-center font-thin'>
-          <img src={footerLogo} alt='HelloMovies Logo' className='w-32 h-4' />
-          <span className='text-sky-300 text-xl mr-4'>|</span>
+      <div className='flex flex-col md:flex-row justify-between'>
+        <div className='flex flex-col md:flex-row justify-center items-center font-thin'>
+          <div className='flex justify-center items-center'>
+            <img src={footerLogo} alt='HelloMovies Logo' className='w-32 h-4' />
+            <span className='text-sky-300 text-xl mr-2'>|</span>
+          </div>
 
           <span className=''>
             &copy; Copyright {new Date().getFullYear()} HelloMovies. All rights
@@ -40,7 +42,7 @@ export default function Footer() {
 
         <div className=''>
           {
-            <div className='flex flex-row gap-4'>
+            <div className='flex flex-row gap-4 justify-center py-4'>
               {socialIcons.map(({ icon, link }) => (
                 <span className='w-5' key={link}>
                   <Link to={link}>

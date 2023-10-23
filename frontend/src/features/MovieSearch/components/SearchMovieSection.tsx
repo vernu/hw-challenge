@@ -1,37 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Input from '@/components/Input/Input'
 
-import {
-  searchMovies,
-  selectMovieSearch,
-  updateSearchQuery,
-} from '@/store/slices/movieSlice'
-import { useAppDispatch, useAppSelector } from '@/store/hooks'
 import SearchingIndicator from './SearchingIndicator'
 import MovieIcon from '@/components/icons/MovieIcon'
 import TvSeriesIcon from '@/components/icons/TvSeriesIcon'
 import SearchIcon from '@/components/icons/SearchIcon'
-
-const DEBOUNCE_DELAY = 500
+import useDebouncedMovieSearch from '../hooks/useDebouncedMovieSearch'
+import { useAppSelector } from '@/store/hooks'
+import { selectMovieSearch } from '@/store/slices/movieSlice'
 
 export default function SearchMovieSection() {
-  const dispatch = useAppDispatch()
-  const { query, loading } = useAppSelector(selectMovieSearch)
-  const [inputValue, setInputValue] = useState('')
+  const { loading } = useAppSelector(selectMovieSearch)
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      dispatch(updateSearchQuery(inputValue))
-      if (inputValue && query !== inputValue) {
-        dispatch(
-          searchMovies({
-            query: inputValue,
-          })
-        )
-      }
-    }, DEBOUNCE_DELAY)
-    return () => clearInterval(interval)
-  }, [dispatch, inputValue, query])
+  const [inputValue, setInputValue] = useState('')
+  useDebouncedMovieSearch(inputValue)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)

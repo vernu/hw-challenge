@@ -1,5 +1,5 @@
-import WelcomeSection from './components/WelcomeSection'
-import SearchMovieSection from './components/SearchMovieSection'
+import WelcomeSection from './WelcomeSection'
+import SearchMovieSection from './SearchMovieSection'
 
 export default function MovieSearchHeader() {
   return (

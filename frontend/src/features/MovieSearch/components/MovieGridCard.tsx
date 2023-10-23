@@ -20,7 +20,7 @@ export default function MovieGridCard({ movie }: MovieGridCardProps) {
             </span>
           </div>
         </div>
-        <div className='text-center font-bold text-secondary truncate'>
+        <div className='text-center font-bold text-secondary truncate uppercase'>
           {title}
         </div>
         <div className='flex justify-center text-xs gap-2'>

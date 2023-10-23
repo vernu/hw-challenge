@@ -1,24 +1,25 @@
-import { useState } from 'react'
 import { useAppSelector } from '@/store/hooks'
 import { selectMovieSearch } from '@/store/slices/movieSlice'
-import MoviesGridView from './components/MoviesGridView'
-import MoviesListView from './components/MoviesListView'
-import { LayoutType } from './enums'
-import ToggleLayoutType from './components/ToggleLayoutType'
-import TotalResults from './components/TotalResults'
-import Pagination from './components/Pagination'
-import NoResultsFound from './components/NoResultsFound'
+import MoviesGridView from './/MoviesGridView'
+import MoviesListView from './/MoviesListView'
+import { LayoutType } from '../enums'
+import ToggleLayoutType from './/ToggleLayoutType'
+import TotalResults from './TotalResults'
+import Pagination from './Pagination'
+import NoResultsFound from './NoResultsFound'
+import useMovieLayout from '../hooks/useMovieLayout'
 
 export default function MovieSearchResult() {
-  const { results, count, query } = useAppSelector(selectMovieSearch)
-  const [layoutType, setLayoutType] = useState<LayoutType>(LayoutType.GRID)
+  const { results, count, query, loading } = useAppSelector(selectMovieSearch)
 
-  if (!query) return null
+  const { layoutType, setLayoutType } = useMovieLayout()
+
+  if (!query || loading) return null
 
   if (query && results?.length === 0) return <NoResultsFound query={query} />
 
   return (
-    <div className='md:mx-16'>
+    <div className=''>
       <div className='flex flex-row justify-between my-8'>
         <TotalResults count={count} />
         <ToggleLayoutType

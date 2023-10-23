@@ -29,7 +29,7 @@ export default function MovieListCard({ movie }: MovieListCardProps) {
           </div>
 
           <div className='flex flex-col'>
-            <div className='text-secondary'>{title}</div>
+            <div className='text-secondary uppercase'>{title}</div>
             <div className=''>
               <div className='flex clear-right text-xs gap-2'>
                 {genres.slice(0, 3).map(({ id, name }) => (

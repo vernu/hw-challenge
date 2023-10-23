@@ -1,12 +1,10 @@
 import Layout from '@/components/Layout/Layout'
-import MovieSearchHeader from '@/features/MovieSearchHeader/MovieSearchHeader'
-import MovieSearchResult from '@/features/MovieSearchResult/MovieSearchResult'
+import MovieSearch from '@/features/MovieSearch/MovieSearch'
 
 export default function HomePage() {
   return (
     <Layout>
-      <MovieSearchHeader />
-      <MovieSearchResult />
+      <MovieSearch />
     </Layout>
   )
 }

@@ -87,6 +87,13 @@ export const movieSlice = createSlice({
     updateSearchQuery: (state, action) => {
       state.search.query = action.payload
     },
+    resetMovieDetail: (state) => {
+      state.detail = {
+        loading: false,
+        data: null,
+        error: null,
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -131,7 +138,7 @@ export const movieSlice = createSlice({
   },
 })
 
-export const { updateSearchQuery } = movieSlice.actions
+export const { updateSearchQuery, resetMovieDetail } = movieSlice.actions
 
 export const selectMovieSearch = (state: RootState) => state.movie.search
 
