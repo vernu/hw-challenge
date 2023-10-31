@@ -1,0 +1,33 @@
+name: run tests
+
+on:
+  push:
+    branches: '*'
+  pull_request:
+    branches: [main]
+
+jobs:
+  Test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v2
+
+      - name: setup docker compose
+        run: sudo apt-get update && sudo apt-get install -y docker
+
+      - name: build the containers
+        run: docker compose up -d --build
+
+      - name: run backend linter
+        run: docker compose exec backend poetry run flake8
+
+      - name: run backend tests
+        run: docker compose exec backend poetry run python -m core.manage test
+
+      - name: run frontend tests
+        run: docker compose exec frontend pnpm run test
+
+      - name: run end-to-end tests
+        run: cd e2e && npm install && npm run test

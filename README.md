@@ -39,8 +39,8 @@ docker compose up --build -d
 - The application will be loaded with genres and movies data from `/backend/movies/fixtures` folder once you run the application with docker. If you want to run the application without docker, you can load the data using the following commands.
 
 ```
-poetry run ./manage.py loaddata genres.json
-poetry run ./manage.py loaddata movies.json
+poetry run python -m core.manage loaddata genres.json
+poetry run python -m core.manage loaddata movies.json
 ```
 
 ## How to run the e2e tests
