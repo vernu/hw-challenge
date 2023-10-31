@@ -3,10 +3,10 @@ version: '3.9'
 services:
   backend:
     build: ./backend
-    command: sh -c "poetry run ./manage.py migrate &&
-      poetry run ./manage.py loaddata genres &&
-      poetry run ./manage.py loaddata movies &&
-      poetry run ./manage.py runserver 0.0.0.0:8000"
+    command: sh -c "poetry run python -m core.manage migrate &&
+      poetry run python -m core.manage loaddata genres &&
+      poetry run python -m core.manage loaddata movies &&
+      poetry run python -m core.manage runserver 0.0.0.0:8000"
     ports:
       - '8000:8000'
     environment:

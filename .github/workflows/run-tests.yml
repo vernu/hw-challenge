@@ -20,8 +20,11 @@ jobs:
       - name: build the containers
         run: docker compose up -d --build
 
+      - name: run backend linter
+        run: docker compose exec backend poetry run flake8
+
       - name: run backend tests
-        run: docker compose exec backend poetry run ./manage.py test
+        run: docker compose exec backend poetry run python -m core.manage test
 
       - name: run frontend tests
         run: docker compose exec frontend pnpm run test

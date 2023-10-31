@@ -1,0 +1,10 @@
+[flake8]
+ignore = W292, W293, W391
+exclude = 
+    .git,
+    __pycache__
+    migrations
+filename = *.py
+
+max-line-length = 120
+max-complexity = 8
